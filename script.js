@@ -40,11 +40,13 @@ function searchWeather(input) {
         // Log the data in the console as well
         console.log("Wind Speed: " + response.wind.speed);
         console.log("Humidity: " + response.main.humidity);
-        console.log("Temperature (F): " + tempF);
+
+        console.log("icon: "+response.weather[0].icon);
+        
         let iconLink = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
         let imgTag = $("<img>")
         imgTag.attr("src", iconLink);
-        $(".icon").html(imgTag)
+        $(".mainImage").html(imgTag);
 
         searchUV(lat,lon);
     });
