@@ -4,12 +4,13 @@ $("#searchBtn").on("click",(event) =>{
     searchCity = $("#searchBar").val().trim();
     console.log(searchCity);
     searchWeather(searchCity);
+    searchForecasts(searchCity);
 });
 
 function searchWeather(input) {
     
     APIKey = "166a433c57516f51dfab1f7edaed8413";
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&appid=" + APIKey;
 
    $.ajax({
     url: queryURL,
@@ -22,7 +23,7 @@ function searchWeather(input) {
         // Log the resulting object
         console.log(response);
         // Transfer content to HTML
-        $(".cityMain").text("City:" + response.name);
+        $("#cityMain").text(response.name);
         $(".windMain").text("Wind Speed: " + response.wind.speed);
         $(".humidityMain").text("Humidity: " + response.main.humidity);
 
@@ -59,6 +60,74 @@ function searchUV(lat,lon){
     })
 
     .then(function(response){
-        $(".uvMain").text("UV Index: "+response.value);
+        $(".uvMain").text("UV Index: "+response[0].value);
+
     });
+}
+
+function searchForecasts(input){
+    APIKey = "166a433c57516f51dfab1f7edaed8413";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&units=metric&cnt=6&appid=" + APIKey;
+
+    $.ajax({
+        url:queryURL,
+        method:"GET"
+    })
+
+    .then(function(response){
+        $("#dayPlusOneTemperature").text("Temperature: "+response.list[0].temp.day);
+        $("#dayPlusOneHumidity").text("Humidity: "+response.list[0].humidity);
+        getDateOne(response.list[0].dt);
+
+        $("#dayPlusTwoTemperature").text("Temperature: "+response.list[1].temp.day);
+        $("#dayPlusTwoHumidity").text("Humidity: "+response.list[1].humidity);
+        getDateTwo(response.list[1].dt);
+
+        $("#dayPlusThreeTemperature").text("Temperature: "+response.list[2].temp.day);
+        $("#dayPlusThreeHumidity").text("Humidity: "+response.list[2].humidity);
+        getDateThree(response.list[2].dt);
+
+        $("#dayPlusFourTemperature").text("Temperature: "+response.list[3].temp.day);
+        $("#dayPlusFourHumidity").text("Humidity: "+response.list[3].humidity);
+        getDateFour(response.list[3].dt);
+
+        $("#dayPlusFiveTemperature").text("Temperature: "+response.list[4].temp.day);
+        $("#dayPlusFiveHumidity").text("Humidity: "+response.list[4].humidity);
+        getDateFive(response.list[4].dt);
+    });
+}
+
+function getDateOne(x){
+    var date = new Date(x*1000);
+    console.log(date);
+
+    $("#dayPlusOneDate").text(date);
+}
+
+function getDateTwo(x){
+    var date = new Date(x*1000);
+    console.log(date);
+
+    $("#dayPlusTwoDate").text(date);
+}
+
+function getDateThree(x){
+    var date = new Date(x*1000);
+    console.log(date);
+
+    $("#dayPlusThreeDate").text(date);
+}
+
+function getDateFour(x){
+    var date = new Date(x*1000);
+    console.log(date);
+
+    $("#dayPlusFourDate").text(date);
+}
+
+function getDateFive(x){
+    var date = new Date(x*1000);
+    console.log(date);
+
+    $("#dayPlusFiveDate").text(date);
 }
