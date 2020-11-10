@@ -25,6 +25,12 @@ function searchWeather(input) {
         $(".cityMain").text("City:" + response.name);
         $(".windMain").text("Wind Speed: " + response.wind.speed);
         $(".humidityMain").text("Humidity: " + response.main.humidity);
+
+        var lat = response.coord.lat;
+        console.log("Lat: " + lat);
+
+        var lon = response.coord.lon;
+        console.log("Lon: " + lon);
         // Convert the temp to fahrenheit
         let tempF = (response.main.temp - 273.15) * 1.80 + 32;
         // add temp content to html
@@ -38,5 +44,21 @@ function searchWeather(input) {
         let imgTag = $("<img>")
         imgTag.attr("src", iconLink);
         $(".icon").html(imgTag)
+
+        searchUV(lat,lon);
     });
 };
+
+function searchUV(lat,lon){
+    APIKey = "166a433c57516f51dfab1f7edaed8413";
+    var queryURL = "http://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&cnt=1&appid="+APIKey;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+
+    .then(function(response){
+        $(".uvMain").text("UV Index: "+response.value);
+    });
+}
