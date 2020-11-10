@@ -1,3 +1,5 @@
+renderLastBrowsed();
+
 $("#searchBtn").on("click",(event) =>{
     event.preventDefault();
     console.log("click");
@@ -5,7 +7,17 @@ $("#searchBtn").on("click",(event) =>{
     console.log(searchCity);
     searchWeather(searchCity);
     searchForecasts(searchCity);
+    localStorage.setItem("city",searchCity);
 });
+
+function renderLastBrowsed() {
+    var city = localStorage.getItem("city");
+    if (!city) {
+      return;
+    }
+    console.log(city);
+    $('.previousCities').text("Previous city: "+ city);
+  }
 
 function searchWeather(input) {
     
