@@ -1,4 +1,5 @@
-$("#searchBtn").on("click",function(){
+$("#searchBtn").on("click",(event) =>{
+    event.preventDefault();
     console.log("click");
     searchCity = $("#searchBar").val().trim();
     console.log(searchCity);
