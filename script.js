@@ -80,22 +80,27 @@ function searchForecasts(input){
         $("#dayPlusOneTemperature").text("Temperature: "+response.list[0].temp.day);
         $("#dayPlusOneHumidity").text("Humidity: "+response.list[0].humidity);
         getDateOne(response.list[0].dt);
+        putImageOne(response.list[0].weather[0].icon);
 
         $("#dayPlusTwoTemperature").text("Temperature: "+response.list[1].temp.day);
         $("#dayPlusTwoHumidity").text("Humidity: "+response.list[1].humidity);
         getDateTwo(response.list[1].dt);
+        putImageTwo(response.list[1].weather[0].icon);
 
         $("#dayPlusThreeTemperature").text("Temperature: "+response.list[2].temp.day);
         $("#dayPlusThreeHumidity").text("Humidity: "+response.list[2].humidity);
         getDateThree(response.list[2].dt);
+        putImageThree(response.list[2].weather[0].icon);
 
         $("#dayPlusFourTemperature").text("Temperature: "+response.list[3].temp.day);
         $("#dayPlusFourHumidity").text("Humidity: "+response.list[3].humidity);
         getDateFour(response.list[3].dt);
+        putImageFour(response.list[3].weather[0].icon);
 
         $("#dayPlusFiveTemperature").text("Temperature: "+response.list[4].temp.day);
         $("#dayPlusFiveHumidity").text("Humidity: "+response.list[4].humidity);
         getDateFive(response.list[4].dt);
+        putImageFive(response.list[3].weather[0].icon);
     });
 }
 
@@ -132,4 +137,39 @@ function getDateFive(x){
     console.log(date);
 
     $("#dayPlusFiveDate").text(date);
+}
+
+function putImageOne(x){
+    let iconLink = "http://openweathermap.org/img/wn/" + x + "@2x.png";
+    let imgTag = $("<img>")
+    imgTag.attr("src", iconLink);
+    $(".dayPlusOneImage").html(imgTag);
+}
+
+function putImageTwo(x){
+    let iconLink = "http://openweathermap.org/img/wn/" + x + "@2x.png";
+    let imgTag = $("<img>")
+    imgTag.attr("src", iconLink);
+    $(".dayPlusTwoImage").html(imgTag);
+}
+
+function putImageThree(x){
+    let iconLink = "http://openweathermap.org/img/wn/" + x + "@2x.png";
+    let imgTag = $("<img>")
+    imgTag.attr("src", iconLink);
+    $(".dayPlusThreeImage").html(imgTag);
+}
+
+function putImageFour(x){
+    let iconLink = "http://openweathermap.org/img/wn/" + x + "@2x.png";
+    let imgTag = $("<img>")
+    imgTag.attr("src", iconLink);
+    $(".dayPlusFourImage").html(imgTag);
+}
+
+function putImageFive(x){
+    let iconLink = "http://openweathermap.org/img/wn/" + x + "@2x.png";
+    let imgTag = $("<img>")
+    imgTag.attr("src", iconLink);
+    $(".dayPlusFiveImage").html(imgTag);
 }
